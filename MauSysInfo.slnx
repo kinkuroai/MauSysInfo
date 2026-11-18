@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MauSysInfo/MauSysInfo.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MauSysInfo.Tests/MauSysInfo.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>MauSysInfo</RootNamespace>
+    <AssemblyName>MauSysInfo</AssemblyName>
+    <Product>Mau SysInfo</Product>
+    <AssemblyTitle>Mau SysInfo</AssemblyTitle>
+    <Version>0.1.0</Version>
+    <Authors>Mausy</Authors>
+    <Company>Mausy</Company>
+    <Copyright>© 2026 Mausy</Copyright>
+    <Description>CPU, memory, mainboard, graphics and system information. Official downloads: https://downloads.kinkuroshideout.com</Description>
+    <!-- WPF Fluent theme (ThemeMode) is flagged experimental. -->
+    <NoWarn>$(NoWarn);WPF0001</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WPF projects drop System.IO from implicit usings (clash with Shapes.Path). -->
+    <Using Include="System.IO" />
+    <InternalsVisibleTo Include="MauSysInfo.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="System.Management" Version="11.0.0" />
+  </ItemGroup>
+
+  <!-- App icon: drop a multi-size .ico at Assets\app.ico. It becomes the exe/taskbar/title-bar icon
+       and is shown in the About window. Builds fine without it. -->
+  <PropertyGroup Condition="Exists('Assets\app.ico')">
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <!-- A plain embedded resource, not a WPF <Resource>: WPF's incremental markup build can miss a newly added
+       Resource file and ship an exe without it, while embedded resources are tracked by the compiler. -->
+  <ItemGroup Condition="Exists('Assets\app.ico')">
+    <EmbeddedResource Include="Assets\app.ico" LogicalName="MauSysInfo.app.ico" />
+  </ItemGroup>
+
+</Project>
